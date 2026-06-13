@@ -1,10 +1,15 @@
 """
-Agent — Realtime Recipe
+Agent — Realtime Vision Recipe
 
 High-level API for managing Agora Conversational AI Agents using a single
-OpenAIRealtime MLLM. The MLLM replaces the cascading STT->LLM->TTS:
+OpenAIRealtime MLLM with camera vision. The MLLM replaces the cascading
+STT->LLM->TTS:
 
-  OpenAIRealtime (voice-to-voice, server_vad turn detection)
+  OpenAIRealtime (voice-to-voice, server_vad turn detection,
+                  input_modalities=["text", "image"])
+
+The web client publishes the user's camera track, so the agent can also "see"
+what the user shows it ("ask it what it sees").
 
 OPENAI_API_KEY is REQUIRED for this recipe — validated in start(), not __init__.
 """
@@ -24,9 +29,10 @@ class Agent:
     """
     High-level wrapper for an Agora Conversational AI Agent using OpenAI Realtime.
 
-    Uses OpenAIRealtime MLLM (voice-to-voice, server_vad) attached via .with_mllm().
-    No separate STT, LLM, or TTS vendors are used. OPENAI_API_KEY is required and
-    is validated at start() time.
+    Uses OpenAIRealtime MLLM (voice-to-voice, server_vad, vision input via
+    input_modalities=["text", "image"]) attached via .with_mllm(). No separate
+    STT, LLM, or TTS vendors are used. OPENAI_API_KEY is required and is
+    validated at start() time.
     """
 
     def __init__(self):
@@ -34,7 +40,8 @@ class Agent:
         self.app_certificate = os.getenv("AGORA_APP_CERTIFICATE")
         self.greeting = os.getenv(
             "AGENT_GREETING",
-            "Hi! I'm a realtime voice assistant — let's just talk.",
+            "Hi! I'm a realtime voice assistant — show me your camera and "
+            "ask me what I see.",
         )
 
         # OPENAI_API_KEY is required for OpenAI Realtime MLLM. Do NOT raise here —
@@ -83,6 +90,7 @@ class Agent:
             self.openai_api_key,
             self.openai_model,
             greeting=self.greeting,
+            input_modalities=["text", "image"],
         )
 
         parameters = {

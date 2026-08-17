@@ -29,6 +29,10 @@ it sees**.
 - **OpenAI API key with Realtime API access** — set as `OPENAI_API_KEY` in `server/.env.local`
 - A browser that grants camera access (allow when prompted)
 
+The same commands work on macOS, Linux, and Windows. On macOS/Linux, setup uses
+`python3`; on Windows, it uses the Python launcher (`py`) or `python`. WSL and
+virtualenv activation are not required.
+
 ## Run It
 
 ```bash

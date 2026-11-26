@@ -14,6 +14,7 @@ def _fresh_agent_module():
 
 
 def test_start_constructs_real_agent_and_returns_shape(fake_env, monkeypatch):
+    monkeypatch.delenv("OPENAI_MODEL", raising=False)
     agent = _fresh_agent_module()
     captured = {}
 
@@ -33,6 +34,7 @@ def test_start_constructs_real_agent_and_returns_shape(fake_env, monkeypatch):
     monkeypatch.setattr(AgoraAgent, "create_async_session", fake_create_async_session)
 
     instance = agent.Agent()
+    assert instance.openai_model == "gpt-realtime"
     result = asyncio.run(instance.start(channel_name="ch", agent_uid=111, user_uid=222))
 
     assert result["agent_id"] == "test-agent-id"

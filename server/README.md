@@ -48,7 +48,7 @@ Optional:
 
 | Variable | Default | Notes |
 | --- | :---: | --- |
-| `OPENAI_MODEL` | `gpt-4o-realtime-preview` | OpenAI Realtime model name |
+| `OPENAI_MODEL` | `gpt-realtime` | OpenAI Realtime model name |
 | `AGENT_GREETING` | built-in | Optional opening line override |
 
 ## API

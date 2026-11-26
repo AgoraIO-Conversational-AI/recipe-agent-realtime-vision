@@ -47,7 +47,7 @@ published camera frames. Turn detection is MLLM-owned (`server_vad`). No tools
 | `AGORA_APP_ID` | — | required |
 | `AGORA_APP_CERTIFICATE` | — | required |
 | `OPENAI_API_KEY` | — | **required** — validated at agent start (not server boot); needs OpenAI Realtime API access |
-| `OPENAI_MODEL` | `gpt-4o-realtime-preview` | OpenAI Realtime model name |
+| `OPENAI_MODEL` | `gpt-realtime` | OpenAI Realtime model name |
 | `AGENT_GREETING` | built-in | Optional opening line override |
 
 ## Patterns
